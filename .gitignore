@@ -1,5 +1,7 @@
 docs/
 tasks/
+learn/
+.claude/
 node_modules/
 .env
 .env.*
