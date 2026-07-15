@@ -7,3 +7,5 @@ node_modules/
 .env.*
 *.jsonl
 traces/
+.tokens.json
+results/**/.tokens.json
