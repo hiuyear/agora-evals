@@ -11,6 +11,7 @@ if (!VILLAGE) throw new Error("VILLAGE_API_URL not set (copy it into .env)");
 const POLL_MS = 10_000;
 const TIMEOUT_MS = 10 * 60_000;
 
+// stamp this condition's model onto the shared roster -> the village's RunConfig
 function buildRunConfig(exp: ExperimentConfig, condition: Condition) {
   return {
     agents: exp.roster.map((a) => ({ ...a, model: condition.model })),
@@ -26,7 +27,7 @@ async function launchOneRun(name: string, config: object): Promise<{ id: string;
     body: JSON.stringify({ name, config }),
   });
   if (createRes.status !== 201) throw new Error(`create failed (${createRes.status})`);
-  const { id, creatorToken } = await createRes.json();
+  const { id, creatorToken } = await createRes.json(); // token = password to start it
 
   const startRes = await fetch(`${VILLAGE}/api/runs/${id}/start`, {
     method: "POST",
@@ -38,6 +39,7 @@ async function launchOneRun(name: string, config: object): Promise<{ id: string;
   return { id, token: creatorToken };
 }
 
+// /start returns 202 (background workflow), so we ask the village until it's done
 async function waitUntilDone(id: string): Promise<"completed" | "error"> {
   const started = Date.now();
   while (Date.now() - started < TIMEOUT_MS) {
@@ -62,6 +64,7 @@ async function main() {
   };
   const tokens: Record<string, string> = {};
 
+  // conditions x replicates, sequential (parallel would hammer the LLM rate limits)
   for (const condition of exp.conditions) {
     for (let rep = 0; rep < exp.replicates; rep++) {
       const name = `${exp.name}-${condition.label}-r${rep}`;
@@ -76,8 +79,8 @@ async function main() {
 
   const dir = `results/${exp.name}`;
   mkdirSync(dir, { recursive: true });
-  writeFileSync(`${dir}/manifest.json`, JSON.stringify(manifest, null, 2));
-  writeFileSync(`${dir}/.tokens.json`, JSON.stringify(tokens, null, 2));
+  writeFileSync(`${dir}/manifest.json`, JSON.stringify(manifest, null, 2)); // committed
+  writeFileSync(`${dir}/.tokens.json`, JSON.stringify(tokens, null, 2)); // gitignored (#10)
   console.log(`manifest: ${dir}/manifest.json (${manifest.runs.length} runs)`);
 }
 

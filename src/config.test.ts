@@ -19,8 +19,7 @@ describe("ExperimentConfigSchema", () => {
   });
 
   it("rejects replicates < 1", () => {
-    const bad = { ...valid, replicates: 0 };
-    expect(ExperimentConfigSchema.safeParse(bad).success).toBe(false);
+    expect(ExperimentConfigSchema.safeParse({ ...valid, replicates: 0 }).success).toBe(false);
   });
 
   it("rejects an unknown model id", () => {
@@ -29,12 +28,10 @@ describe("ExperimentConfigSchema", () => {
   });
 
   it("rejects a roster with fewer than 2 agents", () => {
-    const bad = { ...valid, roster: [valid.roster[0]] };
-    expect(ExperimentConfigSchema.safeParse(bad).success).toBe(false);
+    expect(ExperimentConfigSchema.safeParse({ ...valid, roster: [valid.roster[0]] }).success).toBe(false);
   });
 
   it("rejects a name with illegal characters", () => {
-    const bad = { ...valid, name: "Pilot 2x2!" };
-    expect(ExperimentConfigSchema.safeParse(bad).success).toBe(false);
+    expect(ExperimentConfigSchema.safeParse({ ...valid, name: "Pilot 2x2!" }).success).toBe(false);
   });
 });
