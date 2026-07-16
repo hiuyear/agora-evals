@@ -11,6 +11,16 @@ separate repos on purpose. evals never imports village code, it only talks to
 the village's public api and reads its database, the same way a real third-party
 eval vendor would treat a customer's system.
 
+## this project is still in active development! next: llm-as-judge
+
+right now, the deterministic metrics completed as of now are solid, but i'm more interested in things like "is this trade exploitative", "is the reasoning behind this trade out of empathy", etc --> this will show me more about model behaviours, like greed, empathy, and so on.
+
+so, coming soon: a rubric precise enough that a stranger could apply it consistently, ~20 real trade offers
+hand-labeled by me alone (no llm help, that's the ground truth), then an llm
+judge run on those same offers and checked against my labels with cohen's
+kappa. only if that agreement clears a bar i set before looking at the full
+results does the judge's number get reported anywhere.
+
 ## the finding (pilot, n=2 replicates)
 
 question: if you swap the model powering an entire village (same agents, same
