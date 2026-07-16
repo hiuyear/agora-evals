@@ -54,16 +54,19 @@ const row = (o: Partial<DecisionRow>): DecisionRow => ({
 });
 
 describe("tradeFunnel", () => {
-  it("counts the three gates and the two drop rates", () => {
+  it("follows proposers through the gates and derives the two drop rates", () => {
     const rows = [
-      row({ intent: { action: "TRADE" }, action: "TRADE", outcome: "traded" }),
-      row({ intent: { action: "TRADE" }, action: "TRADE", outcome: "no_trade" }), // agreed, couldn't afford
-      row({ intent: { action: "TRADE" }, action: "REST", outcome: "no_trade" }), // declined
-      row({ intent: { action: "FARM" }, action: "FARM", outcome: "ok" }),
+      row({ intent: { action: "TRADE" }, action: "TRADE", outcome: "traded" }), // offered+accepted+executed
+      row({ intent: { action: "TRADE" }, action: "TRADE", outcome: "no_trade" }), // accepted, couldn't afford
+      row({ intent: { action: "TRADE" }, action: "REST", outcome: "no_trade" }), // declined -> rewritten to REST
+      row({ intent: { action: "FARM" }, action: "FARM", outcome: "ok" }), // never tried to trade
+      // accepter: their round-1 intent was MINE, they took someone's offer. must NOT
+      // count as an offer, or accepted would exceed offered (the real-data bug).
+      row({ intent: { action: "MINE" }, action: "TRADE", outcome: "traded" }),
     ];
     const f = tradeFunnel(rows);
     expect(f.offered).toBe(3);
-    expect(f.accepted).toBe(2);
+    expect(f.accepted).toBe(2); // accepter excluded despite action=TRADE
     expect(f.executed).toBe(1);
     expect(f.declineRate).toBeCloseTo(1 / 3);
     expect(f.unaffordableRate).toBeCloseTo(1 / 2);

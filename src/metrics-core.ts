@@ -37,11 +37,14 @@ export function wealth(inv: Inventory, valuation: Record<string, number> = VALUA
   return Object.entries(inv).reduce((sum, [res, qty]) => sum + qty * (valuation[res] ?? 0), 0);
 }
 
-// offered -> accepted -> executed. the two gaps are the interesting findings.
+// follow the PROPOSERS through the gates. an accepter's row has action=TRADE but
+// intent!=TRADE (their round-1 plan was rewritten), so filtering to intent=TRADE
+// first excludes them — otherwise accepters double-count and accepted > offered.
 export function tradeFunnel(rows: DecisionRow[]) {
-  const offered = rows.filter((r) => r.intent?.action === "TRADE").length;
-  const accepted = rows.filter((r) => r.action === "TRADE").length;
-  const executed = rows.filter((r) => r.outcome === "traded").length;
+  const proposals = rows.filter((r) => r.intent?.action === "TRADE");
+  const offered = proposals.length;
+  const accepted = proposals.filter((r) => r.action === "TRADE").length; // not rewritten to REST = not declined
+  const executed = proposals.filter((r) => r.outcome === "traded").length;
   return {
     offered,
     accepted,
