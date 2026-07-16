@@ -5,6 +5,11 @@ import { readFileSync } from "node:fs";
 // independent variable, everything else is held constant at the experiment level.
 // if agents/turns lived here we could accidentally compare haiku@3-agents vs
 // gpt@5-agents and never know it was a confound.
+//
+// every roster agent gets stamped with the SAME condition.model (see runner.ts
+// buildRunConfig) -> each game is single-model, all-haiku or all-4o-mini, never
+// mixed. question asked: does the model powering a homogeneous village change
+// its behavior — not how differently-abled agents behave trading with each other.
 export const ConditionSchema = z.object({
   label: z.string().min(1),
   model: z.enum(["claude-haiku-4-5", "gpt-4o-mini"]),

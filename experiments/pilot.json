@@ -11,5 +11,6 @@
   ],
   "startingInventory": { "food": 10, "ore": 2, "gold": 5 },
   "turns": 8,
-  "replicates": 2
+  "replicates": 2,
+  "notes": "Does the model powering an entire homogeneous village change its trade/inequality behavior? Same roster, same starting state, all agents on one model per game (never mixed)."
 }
