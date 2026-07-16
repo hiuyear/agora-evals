@@ -1,0 +1,50 @@
+[
+  {
+    "label": "haiku",
+    "runId": "0b317adc-a6b7-4f43-8d15-fe4d9f975817",
+    "finalGini": 0.03850050658561299,
+    "offered": 2,
+    "accepted": 1,
+    "executed": 1,
+    "declineRate": 0.5,
+    "unaffordableRate": 0,
+    "cost": 0.015103999999999996,
+    "meanLatencyMs": 2340.0833333333335
+  },
+  {
+    "label": "haiku",
+    "runId": "3f8fe096-ef4d-4a56-8c22-033927277f1f",
+    "finalGini": 0.034034034034034155,
+    "offered": 1,
+    "accepted": 1,
+    "executed": 1,
+    "declineRate": 0,
+    "unaffordableRate": 0,
+    "cost": 0.014169,
+    "meanLatencyMs": 2950.6666666666665
+  },
+  {
+    "label": "4o-mini",
+    "runId": "ed76d6c6-520e-4301-94d4-3c858ef19f97",
+    "finalGini": 0.22322775263951744,
+    "offered": 9,
+    "accepted": 9,
+    "executed": 8,
+    "declineRate": 0,
+    "unaffordableRate": 0.1111111111111111,
+    "cost": 0.0021696000000000003,
+    "meanLatencyMs": 1828.9583333333333
+  },
+  {
+    "label": "4o-mini",
+    "runId": "aba80cad-e8f5-4ffc-a7fc-ed2478ba22f1",
+    "finalGini": 0.14141414141414144,
+    "offered": 7,
+    "accepted": 5,
+    "executed": 5,
+    "declineRate": 0.2857142857142857,
+    "unaffordableRate": 0,
+    "cost": 0.0019869000000000006,
+    "meanLatencyMs": 1526.8333333333333
+  }
+]

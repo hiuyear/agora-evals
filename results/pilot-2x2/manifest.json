@@ -1,0 +1,58 @@
+{
+  "experiment": {
+    "name": "pilot-2x2",
+    "conditions": [
+      {
+        "label": "haiku",
+        "model": "claude-haiku-4-5"
+      },
+      {
+        "label": "4o-mini",
+        "model": "gpt-4o-mini"
+      }
+    ],
+    "roster": [
+      {
+        "name": "Mira",
+        "personality": "cautious",
+        "specialty": "farmer"
+      },
+      {
+        "name": "Rex",
+        "personality": "shrewd",
+        "specialty": "miner"
+      },
+      {
+        "name": "Juno",
+        "personality": "generous",
+        "specialty": "farmer"
+      }
+    ],
+    "startingInventory": {
+      "food": 10,
+      "ore": 2,
+      "gold": 5
+    },
+    "turns": 8,
+    "replicates": 2
+  },
+  "createdAt": "2026-07-15T21:41:03.575Z",
+  "runs": [
+    {
+      "label": "haiku",
+      "runId": "0b317adc-a6b7-4f43-8d15-fe4d9f975817"
+    },
+    {
+      "label": "haiku",
+      "runId": "3f8fe096-ef4d-4a56-8c22-033927277f1f"
+    },
+    {
+      "label": "4o-mini",
+      "runId": "ed76d6c6-520e-4301-94d4-3c858ef19f97"
+    },
+    {
+      "label": "4o-mini",
+      "runId": "aba80cad-e8f5-4ffc-a7fc-ed2478ba22f1"
+    }
+  ]
+}

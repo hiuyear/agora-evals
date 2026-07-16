@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>pilot-2x2 — agora-evals report</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb; --surface-2: #f3f2ef;
+    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #6f6e69;
+    --series-1: #2a78d6; --series-2: #1baf7a;
+    --border: #e3e1da;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-1: #1a1a19; --surface-2: #232320;
+      --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+      --series-1: #3987e5; --series-2: #199e70;
+      --border: #33322d;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-1: #1a1a19; --surface-2: #232320;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #8f8e86;
+    --series-1: #3987e5; --series-2: #199e70;
+    --border: #33322d;
+  }
+  body { background: var(--surface-1); color: var(--text-primary); font-family: -apple-system, system-ui, sans-serif; margin: 0; padding: 2rem; }
+  main { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+  .hypothesis { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2rem; max-width: 640px; }
+  .legend { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  .chart-block { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+  .chart-block h3 { margin: 0 0 0.5rem; font-size: 0.95rem; color: var(--text-secondary); font-weight: 600; }
+  .chart { width: 100%; height: auto; }
+  .value-label { fill: var(--text-primary); font-size: 11px; font-weight: 600; }
+  .axis-label { fill: var(--text-secondary); font-size: 11px; }
+  table.fallback-table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; font-size: 0.8rem; }
+  table.fallback-table th, table.fallback-table td { text-align: left; padding: 0.25rem 0.5rem; color: var(--text-secondary); }
+  table.fallback-table th { color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+  .appendix { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .appendix th, .appendix td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); }
+  .appendix th { color: var(--text-muted); font-weight: 500; }
+  .mono { font-family: ui-monospace, monospace; color: var(--text-muted); }
+  .limitations { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-top: 2rem; font-size: 0.85rem; color: var(--text-secondary); }
+  .limitations h3 { margin-top: 0; font-size: 0.9rem; color: var(--text-primary); }
+  h2 { font-size: 1.1rem; margin: 2rem 0 0.75rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>pilot-2x2</h1>
+  <p class="hypothesis"></p>
+  <div class="legend">
+    <span><span class="swatch" style="background:var(--series-1)"></span>4o-mini</span>
+    <span><span class="swatch" style="background:var(--series-2)"></span>haiku</span>
+  </div>
+
+  <h2>Behavior</h2>
+  <div class="grid">
+    <div class="chart-block">
+      <h3>Final Gini (wealth inequality)</h3>
+      <svg viewBox="0 0 420 220" class="chart">
+        <line x1="50" y1="186" x2="400" y2="186" stroke="var(--text-secondary)" stroke-width="1" />
+        
+      <rect x="93.75" y="68.10411992668506" width="87.5" height="117.89588007331494" rx="4" fill="var(--series-1)" />
+      <line x1="137.5" y1="41.65217391304347" x2="137.5" y2="94.55606594032665" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="41.65217391304347" x2="143.5" y2="41.65217391304347" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="94.55606594032665" x2="143.5" y2="94.55606594032665" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="137.5" y="58.10411992668506" text-anchor="middle" class="value-label">0.18</text>
+      <text x="137.5" y="206" text-anchor="middle" class="axis-label">4o-mini</text>
+    
+      <rect x="268.75" y="162.54815960408928" width="87.5" height="23.45184039591072" rx="4" fill="var(--series-2)" />
+      <line x1="312.5" y1="161.1040613623213" x2="312.5" y2="163.99225784585727" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="161.1040613623213" x2="318.5" y2="161.1040613623213" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="163.99225784585727" x2="318.5" y2="163.99225784585727" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="312.5" y="152.54815960408928" text-anchor="middle" class="value-label">0.04</text>
+      <text x="312.5" y="206" text-anchor="middle" class="axis-label">haiku</text>
+    
+      </svg>
+      <table class="fallback-table">
+        <thead><tr><th>condition</th><th>mean</th><th>95% CI</th></tr></thead>
+        <tbody><tr><td>4o-mini</td><td>0.18</td><td>0.14 – 0.22</td></tr><tr><td>haiku</td><td>0.04</td><td>0.03 – 0.04</td></tr></tbody>
+      </table>
+    </div>
+    <div class="chart-block">
+      <h3>Trade offers made</h3>
+      <svg viewBox="0 0 420 220" class="chart">
+        <line x1="50" y1="186" x2="400" y2="186" stroke="var(--text-secondary)" stroke-width="1" />
+        
+      <rect x="93.75" y="57.690821256038646" width="87.5" height="128.30917874396135" rx="4" fill="var(--series-1)" />
+      <line x1="137.5" y1="41.65217391304347" x2="137.5" y2="73.72946859903382" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="41.65217391304347" x2="143.5" y2="41.65217391304347" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="73.72946859903382" x2="143.5" y2="73.72946859903382" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="137.5" y="47.690821256038646" text-anchor="middle" class="value-label">8.0</text>
+      <text x="137.5" y="206" text-anchor="middle" class="axis-label">4o-mini</text>
+    
+      <rect x="268.75" y="161.94202898550725" width="87.5" height="24.057971014492754" rx="4" fill="var(--series-2)" />
+      <line x1="312.5" y1="153.92270531400965" x2="312.5" y2="169.96135265700482" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="153.92270531400965" x2="318.5" y2="153.92270531400965" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="169.96135265700482" x2="318.5" y2="169.96135265700482" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="312.5" y="151.94202898550725" text-anchor="middle" class="value-label">1.5</text>
+      <text x="312.5" y="206" text-anchor="middle" class="axis-label">haiku</text>
+    
+      </svg>
+      <table class="fallback-table">
+        <thead><tr><th>condition</th><th>mean</th><th>95% CI</th></tr></thead>
+        <tbody><tr><td>4o-mini</td><td>8.0</td><td>7.0 – 9.0</td></tr><tr><td>haiku</td><td>1.5</td><td>1.0 – 2.0</td></tr></tbody>
+      </table>
+    </div></div>
+
+  <h2>Trade funnel drop-off</h2>
+  <div class="grid">
+    <div class="chart-block">
+      <h3>Decline rate</h3>
+      <svg viewBox="0 0 420 220" class="chart">
+        <line x1="50" y1="186" x2="400" y2="186" stroke="var(--text-secondary)" stroke-width="1" />
+        
+      <rect x="93.75" y="144.7577639627826" width="87.5" height="41.2422360372174" rx="4" fill="var(--series-1)" />
+      <line x1="137.5" y1="103.51552795443477" x2="137.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="103.51552795443477" x2="143.5" y2="103.51552795443477" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="186" x2="143.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="137.5" y="134.7577639627826" text-anchor="middle" class="value-label">14.3%</text>
+      <text x="137.5" y="206" text-anchor="middle" class="axis-label">4o-mini</text>
+    
+      <rect x="268.75" y="113.82608695652173" width="87.5" height="72.17391304347827" rx="4" fill="var(--series-2)" />
+      <line x1="312.5" y1="41.65217391304347" x2="312.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="41.65217391304347" x2="318.5" y2="41.65217391304347" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="186" x2="318.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="312.5" y="103.82608695652173" text-anchor="middle" class="value-label">25.0%</text>
+      <text x="312.5" y="206" text-anchor="middle" class="axis-label">haiku</text>
+    
+      </svg>
+      <table class="fallback-table">
+        <thead><tr><th>condition</th><th>mean</th><th>95% CI</th></tr></thead>
+        <tbody><tr><td>4o-mini</td><td>14.3%</td><td>0.0% – 28.6%</td></tr><tr><td>haiku</td><td>25.0%</td><td>0.0% – 50.0%</td></tr></tbody>
+      </table>
+    </div>
+    <div class="chart-block">
+      <h3>Unaffordable-after-agreeing rate</h3>
+      <svg viewBox="0 0 420 220" class="chart">
+        <line x1="50" y1="186" x2="400" y2="186" stroke="var(--text-secondary)" stroke-width="1" />
+        
+      <rect x="93.75" y="113.82608689156521" width="87.5" height="72.17391310843479" rx="4" fill="var(--series-1)" />
+      <line x1="137.5" y1="41.65217391304347" x2="137.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="41.65217391304347" x2="143.5" y2="41.65217391304347" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="186" x2="143.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="137.5" y="103.82608689156521" text-anchor="middle" class="value-label">5.6%</text>
+      <text x="137.5" y="206" text-anchor="middle" class="axis-label">4o-mini</text>
+    
+      <rect x="268.75" y="186" width="87.5" height="0" rx="4" fill="var(--series-2)" />
+      <line x1="312.5" y1="186" x2="312.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="186" x2="318.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="186" x2="318.5" y2="186" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="312.5" y="176" text-anchor="middle" class="value-label">0.0%</text>
+      <text x="312.5" y="206" text-anchor="middle" class="axis-label">haiku</text>
+    
+      </svg>
+      <table class="fallback-table">
+        <thead><tr><th>condition</th><th>mean</th><th>95% CI</th></tr></thead>
+        <tbody><tr><td>4o-mini</td><td>5.6%</td><td>0.0% – 11.1%</td></tr><tr><td>haiku</td><td>0.0%</td><td>0.0% – 0.0%</td></tr></tbody>
+      </table>
+    </div></div>
+
+  <h2>Cost &amp; latency</h2>
+  <div class="grid">
+    <div class="chart-block">
+      <h3>Cost per run</h3>
+      <svg viewBox="0 0 420 220" class="chart">
+        <line x1="50" y1="186" x2="400" y2="186" stroke="var(--text-secondary)" stroke-width="1" />
+        
+      <rect x="93.75" y="166.1383163688283" width="87.5" height="19.8616836311717" rx="4" fill="var(--series-1)" />
+      <line x1="137.5" y1="165.26529108327193" x2="137.5" y2="167.01134165438467" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="165.26529108327193" x2="143.5" y2="165.26529108327193" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="167.01134165438467" x2="143.5" y2="167.01134165438467" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="137.5" y="156.1383163688283" text-anchor="middle" class="value-label">$0.0021</text>
+      <text x="137.5" y="206" text-anchor="middle" class="axis-label">4o-mini</text>
+    
+      <rect x="268.75" y="46.12003730655857" width="87.5" height="139.87996269344143" rx="4" fill="var(--series-2)" />
+      <line x1="312.5" y1="41.65217391304347" x2="312.5" y2="50.587900700073675" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="41.65217391304347" x2="318.5" y2="41.65217391304347" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="50.587900700073675" x2="318.5" y2="50.587900700073675" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="312.5" y="36.12003730655857" text-anchor="middle" class="value-label">$0.0146</text>
+      <text x="312.5" y="206" text-anchor="middle" class="axis-label">haiku</text>
+    
+      </svg>
+      <table class="fallback-table">
+        <thead><tr><th>condition</th><th>mean</th><th>95% CI</th></tr></thead>
+        <tbody><tr><td>4o-mini</td><td>$0.0021</td><td>$0.0020 – $0.0022</td></tr><tr><td>haiku</td><td>$0.0146</td><td>$0.0142 – $0.0151</td></tr></tbody>
+      </table>
+    </div>
+    <div class="chart-block">
+      <h3>Mean LLM latency</h3>
+      <svg viewBox="0 0 420 220" class="chart">
+        <line x1="50" y1="186" x2="400" y2="186" stroke="var(--text-secondary)" stroke-width="1" />
+        
+      <rect x="93.75" y="103.91664620130317" width="87.5" height="82.08335379869683" rx="4" fill="var(--series-1)" />
+      <line x1="137.5" y1="96.52660661309916" x2="137.5" y2="111.30668578950718" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="96.52660661309916" x2="143.5" y2="96.52660661309916" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="131.5" y1="111.30668578950718" x2="143.5" y2="111.30668578950718" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="137.5" y="93.91664620130317" text-anchor="middle" class="value-label">1678ms</text>
+      <text x="137.5" y="206" text-anchor="middle" class="axis-label">4o-mini</text>
+    
+      <rect x="268.75" y="56.58716772431825" width="87.5" height="129.41283227568175" rx="4" fill="var(--series-2)" />
+      <line x1="312.5" y1="41.65217391304347" x2="312.5" y2="71.52216153559301" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="41.65217391304347" x2="318.5" y2="41.65217391304347" stroke="var(--text-primary)" stroke-width="2" />
+      <line x1="306.5" y1="71.52216153559301" x2="318.5" y2="71.52216153559301" stroke="var(--text-primary)" stroke-width="2" />
+      <text x="312.5" y="46.58716772431825" text-anchor="middle" class="value-label">2645ms</text>
+      <text x="312.5" y="206" text-anchor="middle" class="axis-label">haiku</text>
+    
+      </svg>
+      <table class="fallback-table">
+        <thead><tr><th>condition</th><th>mean</th><th>95% CI</th></tr></thead>
+        <tbody><tr><td>4o-mini</td><td>1678ms</td><td>1527ms – 1829ms</td></tr><tr><td>haiku</td><td>2645ms</td><td>2340ms – 2951ms</td></tr></tbody>
+      </table>
+    </div></div>
+
+  <h2>Per-run appendix</h2>
+  <table class="appendix">
+    <thead><tr><th>condition</th><th>run</th><th>final gini</th><th>offered</th><th>accepted</th><th>executed</th><th>cost</th><th>mean latency</th></tr></thead>
+    <tbody>
+    <tr>
+      <td>haiku</td><td class="mono">0b317adc</td>
+      <td>0.04</td><td>2</td><td>1</td><td>1</td>
+      <td>$0.0151</td><td>2340ms</td>
+    </tr>
+    <tr>
+      <td>haiku</td><td class="mono">3f8fe096</td>
+      <td>0.03</td><td>1</td><td>1</td><td>1</td>
+      <td>$0.0142</td><td>2951ms</td>
+    </tr>
+    <tr>
+      <td>4o-mini</td><td class="mono">ed76d6c6</td>
+      <td>0.22</td><td>9</td><td>9</td><td>8</td>
+      <td>$0.0022</td><td>1829ms</td>
+    </tr>
+    <tr>
+      <td>4o-mini</td><td class="mono">aba80cad</td>
+      <td>0.14</td><td>7</td><td>5</td><td>5</td>
+      <td>$0.0020</td><td>1527ms</td>
+    </tr></tbody>
+  </table>
+
+  <div class="limitations">
+    <h3>Limitations</h3>
+    <p>n=2 replicates per condition — small sample, CIs describe
+    run-to-run noise here, not formal significance (no p-value). Replicates are
+    independent samples, not deterministic reruns (LLM calls at temp&gt;0 aren't
+    seedable). Judge (exploitation-of-need) not run this pass. Gini uses total
+    wealth with labor-cost weights {food:2, ore:3, gold:6}, not gold alone.</p>
+  </div>
+</main>
+</body>
+</html>
