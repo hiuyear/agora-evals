@@ -6,6 +6,7 @@ import "dotenv/config";
 const db = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
 
 async function metricsForRun(runId: string) {
+    // take the last turn's ending state for metrics
   const { data: lastTurn } = await db
     .from("turns")
     .select("state")
@@ -17,14 +18,15 @@ async function metricsForRun(runId: string) {
   const agents = (lastTurn?.state as { agents: Record<string, Inventory> } | undefined)?.agents ?? {};
   const finalGini = gini(Object.values(agents).map((inv) => wealth(inv)));
 
+// for metrics that look at all decisions' data
   const { data } = await db
     .from("decisions")
     .select("intent, action, outcome, agent_model, input_tokens, output_tokens, latency_ms")
     .eq("run_id", runId);
 
   const rows = (data ?? []) as DecisionRow[];
-  const latencies = rows.map((r) => r.latency_ms ?? 0);
-  const meanLatencyMs = latencies.length ? latencies.reduce((a, b) => a + b, 0) / latencies.length : 0;
+  const latencies = rows.map((r) => r.latency_ms ?? 0); // take each decisions' latency
+  const meanLatencyMs = latencies.length ? latencies.reduce((a, b) => a + b, 0) / latencies.length : 0; // take average of all decisions' latencies 
 
   return {
     runId,
